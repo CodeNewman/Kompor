@@ -1,0 +1,87 @@
+http://q.10jqka.com.cn/index/index/board/all/field/zdf/order/desc/page/1/ajax/1/
+
+[0]	[1,2]	[3,4]	[5]	[6]		[7]	[8]		[9]		[10]	[11]	[12]	[13]	[14]	[15]	[16..18]
+序号	代码	             名称		现价	涨跌幅(%)	涨跌	涨速(%)	换手(%)	量比		振幅(%)	成交额		流通股		流通市值	市盈率		加自选
+
+
+序号	代码	名称	现价	涨跌幅(%)	涨跌	涨速(%)	换手(%)	量比	振幅(%)	成交额	流通股	流通市值	市盈率	加自选
+1	002109	兴化股份	9.64	10.05	0.88	--	22.82	3.04	2.85	4.60亿	2.10亿	20.25亿	33.81	
+2	000930	中粮生化	14.36	10.04	1.31	--	20.43	4.43	3.98	27.91亿	9.64亿	138.49亿	30.88	
+3	603386	广东骏亚	10.86	10.03	0.99	--	0.01	0.32	--	5.00万	5050.00万	5.48亿	39.20	
+4	000868	安凯客车	7.57	10.03	0.69	--	1.08	1.06	--	5671.40万	6.96亿	52.65亿	--	
+5	603277	银都股份	23.71	10.02	2.16	--	0.06	2.07	--	87.73万	6600.00万	15.65亿	41.13	
+6	002898	赛隆药业	14.49	10.02	1.32	--	0.01	0.93	--	8.41万	4000.00万	5.80亿	35.63	
+7	600645	中源协和	26.24	10.02	2.39	--	11.98	3.78	10.69	10.78亿	3.54亿	93.01亿	603.89	
+8	002668	奥马电器	21.30	10.02	1.94	--	8.32	8.90	2.53	6.91亿	3.90亿	83.16亿	36.05	
+9	300381	溢多利	16.80	10.02	1.53	--	5.57	2.80	10.35	2.91亿	3.19亿	53.60亿	163.75	
+10	603725	天安新材	24.60	10.02	2.24	--	0.13	1.51	--	119.06万	3668.00万	9.02亿	69.33	
+11	300698	万马科技	22.41	10.02	2.04	--	0.19	2.28	--	139.86万	3350.00万	7.51亿	59.04	
+12	603527	众源新材	30.77	10.01	2.80	--	0.15	3.68	--	148.31万	3110.00万	9.57亿	51.02	
+13	300308	中际装备	42.21	10.01	3.84	--	2.54	3.08	9.41	2.29亿	2.16亿	91.18亿	2440.83	
+14	603882	金域医学	14.62	10.01	1.33	--	0.03	1.71	--	29.39万	6868.00万	10.04亿	39.80	
+15	300681	英搏尔	76.63	10.01	6.97	--	27.54	1.31	12.09	3.76亿	1890.00万	14.48亿	75.09	
+16	300697	电工合金	17.70	10.01	1.61	--	0.03	1.66	--	22.76万	4000.00万	7.08亿	45.60	
+17	603500	祥和实业	40.68	10.01	3.70	--	0.28	1.00	--	364.47万	3150.00万	12.81亿	70.08	
+18	002826	易明医药	22.21	10.01	2.02	--	14.18	5.52	5.99	1.47亿	4743.00万	10.53亿	98.77	
+19	603127	昭衍新药	68.40	10.00	6.22	--	2.03	2.42	--	2842.17万	2050.00万	14.02亿	229.61	
+20	300401	花园生物	47.51	10.00	4.32	--	9.66	2.33	6.99	4.40亿	9850.70万	46.80亿	57.31	
+ 1  2  3  4  5  下一页尾页1/155
+
+ 
+ <table class="m-table m-pager-table">
+    <thead>
+        <tr>
+            <th style="width:4%">序号</th>
+            <th style="width:6%">代码</th>
+            <th style="width:8%">名称</th>
+            <th style="width:6%" ><a href="javascript:void(0)" field="xj" >现价<i></i></a></th>
+            <th style="width:8%"  class="cur"><a href="javascript:void(0)" field="zdf" order="desc"  class="desc">涨跌幅(%)<i></i></a></th>
+            <th style="width:6%" ><a href="javascript:void(0)" field="zd" >涨跌<i></i></a></th>
+            <th style="width:8%" ><a href="javascript:void(0)" field="zs" >涨速(%)<i></i></a></th>
+            <th style="width:8%" ><a href="javascript:void(0)" field="hs" >换手(%)<i></i></a></th>
+            <th style="width:6%" ><a href="javascript:void(0)" field="lb" >量比<i></i></a></th>
+            <th style="width:6%" ><a href="javascript:void(0)" field="zf" >振幅(%)<i></i></a></th>
+            <th style="width:7%" ><a href="javascript:void(0)" field="cje" >成交额<i></i></a></th>
+            <th style="width:8%" ><a href="javascript:void(0)" field="ltg" >流通股<i></i></a></th>
+            <th style="width:8%" ><a href="javascript:void(0)" field="ltsz" >流通市值<i></i></a></th>
+            <th style="width:7%" ><a href="javascript:void(0)" field="syl" >市盈率<i></i></a></th>
+            <!--th>概念题材</th-->
+            <th style="width:4%">加自选</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td><a href="http://stockpage.10jqka.com.cn/002109/" target="_blank">002109</a></td>
+            <td><a href="http://stockpage.10jqka.com.cn/002109/" target="_blank">兴化股份</a></td>
+            <td class="c-rise">9.64</td>
+            <td class="c-rise">10.05</td>
+            <td class="c-rise">0.88</td>
+            <td class="">--</td>
+            <td>22.03</td>
+            <td class="c-rise">8.94</td>
+            <td class="c-rise">2.85</td>
+            <td>4.44亿</td>
+            <td>2.10亿</td>
+            <td>20.25亿</td>
+            <td>33.81</td>
+            <td><a class="j_addStock" title="加自选" href="javascript:void(0);"><img src="http://i.thsi.cn/images/q/plus_logo.png" alt=""></a></td>
+        </tr>
+    </tbody>
+</table>
+<input type="hidden" id="request" value='{"board":"all","field":"zdf","order":"desc","page":"1","ajax":"1"}'>
+<input type="hidden" id="baseUrl" value='index/index'>
+<div class="m-pager" id="m-page">
+    &nbsp;
+    <a class="cur" page="1" href="javascript:void(0)">1</a>
+    &nbsp;&nbsp;
+    <a class="changePage" page="2" href="javascript:void(0);">2</a>
+    &nbsp;&nbsp;
+    <a class="changePage" page="3" href="javascript:void(0);">3</a>
+    &nbsp;&nbsp;
+    <a class="changePage" page="4" href="javascript:void(0);">4</a>
+    &nbsp;&nbsp;<a class="changePage" page="5" href="javascript:void(0);">5</a>
+    &nbsp;&nbsp;<a class="changePage" page="2" href="javascript:void(0);">下一页</a>
+    <a class="changePage" page="155" href="javascript:void(0);">尾页</a>
+    <span class="page_info">1/155</span>
+</div>
