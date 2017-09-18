@@ -26,3 +26,4 @@ CN_CASSANDRA_PASSWD            = 'cassandra'
 CN_CASSANDRA_KEYSPACE          = "cn_kavoutdata"
 
 CN_TABLES_STOCK_RATIO_FROM_10JQKA     = "stock_ratio_from_10jqka"
+CN_TABLES_STOCK_BASIC_FROM_10JQKA     = "stock_basic_from_10jqka"

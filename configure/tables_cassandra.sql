@@ -1,3 +1,4 @@
+-- 建库 中国区
 CREATE KEYSPACE cn_kavoutdata WITH replication = {'class': 'NetworkTopologyStrategy', 'dc1': '1', 'dc2': '1'}  AND durable_writes = true;
 
 
@@ -20,4 +21,17 @@ create table if not exists stock_ratio_from_10jqka(
 
 	PRIMARY KEY(symbol, date)
 ) WITH CLUSTERING ORDER BY(date DESC);
+
+
+-- stock detial value  股票基本信息
+create table if not exists stock_basic_from_10jqka(
+	symbol               text    , -- 代码
+	name                 text    , -- 名称
+	rt                   text    , -- 交易时间
+	total                text    , -- 总交易日数量
+	start                date    , -- 上市日期
+	year                 text    , -- 每年度交易日数量
+
+	PRIMARY KEY(symbol, name)
+) WITH CLUSTERING ORDER BY(name ASC);
 

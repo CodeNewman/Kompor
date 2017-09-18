@@ -20,14 +20,16 @@ def get_code_url(page = 1):
     return _code_url %(page)
 
 
-def get_share_url(cycle_cycle = LINE, \
-                  area = AREA_KEY, \
-                  symbol = None, \
-                  share_type = None, \
-                  transaction_cyle = None, \
-                  year = None
+def get_share_url(cycle_cycle      = LINE    , \
+                  area             = AREA_KEY, \
+                  symbol           = None    , \
+                  share_type       = None    , \
+                  transaction_cyle = None    , \
+                  year             = None
                   ):
-    area = str(area.name)
+    area   = str(area.name)
+    symbol = str(symbol)
+    year   = str(year)
     
     if symbol and share_type and transaction_cyle and year :
         return _share_url % (cycle_cycle, area, symbol, share_type, transaction_cyle, year)
