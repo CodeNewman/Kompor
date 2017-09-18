@@ -5,9 +5,9 @@ Created on Sep 13, 2017
 '''
 import os
 import sys
-import enum
 
 import datetime
+from configure.common_config import CRAWL_PAGE_TYPE
 
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if base_dir not in sys.path:
@@ -18,24 +18,18 @@ from configure.cn_setting import LINE, OFF_SHARE, DAY, CN_CASSANDRA_KEYSPACE,\
     CN_CASSANDRA_HOSTS, CN_CASSANDRA_PASSWD, CN_CASSANDRA_PORT,\
     CN_CASSANDRA_USER, CN_TABLES_STOCK_RATIO_FROM_10JQKA,\
     CN_TABLES_STOCK_BASIC_FROM_10JQKA
-from crawl_stock.crawl import crawl
+from crawl_lib.crawl import crawl
 from url_lib import url_cn
 from dao.casd_dao import CassandraDao
 
 import warnings
 warnings.filterwarnings("ignore")
 
-CRAWL_PAGE_TYPE = enum.Enum("CRAWL_PAGE_TYPE", (
-    'json',
-    'text',
-    'html',
-    ))
-
 crawler = crawl()
 
 class flush(object):
     '''
-    classdocs
+
     '''
 
 
@@ -198,8 +192,8 @@ class flush(object):
 def main():
     print('start 10jqka worker !')
     crawl = flush(AREA_KEY)
-#     stocks = crawl.craw_ratio()
-#     crawl.insert_to_db(stocks)
+    stocks = crawl.craw_ratio()
+    crawl.insert_to_db(stocks)
     crawl.crawl_quote()
     print('crawl 10jqka has Completed !')
 

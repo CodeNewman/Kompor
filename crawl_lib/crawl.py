@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 
 class crawl(object):
     '''
-    crawler
+    crawl_lib
     '''
 
     def craw_to_string(self, url):

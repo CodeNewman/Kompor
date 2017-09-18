@@ -1,0 +1,44 @@
+### 设置国内镜像
+# 添加Anaconda的TUNA镜像
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+# TUNA的help中镜像地址加有引号，需要去掉
+# 设置搜索时显示通道地址
+conda config --set show_channel_urls yes
+
+
+### Conda的包管理 [root]
+conda install anaconda
+conda update conda anaconda python
+conda install requests boto3 click aiohttp gunicorn pytz lxml PyMySQL numpy 
+pip install cassandra-driver bs4 cchardet ConcurrentLogHandler TA-Lib
+
+### 新用户创建
+[root] adduser anaconda
+[root] conda install anaconda
+[user] conda create --name python36 python=3.6.2 anaconda
+
+### 更新env包
+conda update conda anaconda python
+
+### 使用时激活
+export ANACONDA_HOME=/usr/local/anaconda3/
+export PATH=$ANACONDA_HOME/bin:$PATH
+source ~/.bashrc
+source activate python36
+
+
+
+### centos7环境设置
+yum install git svn 
+yum install zlib-devel bzip2-devel openssl-devel ncurese-devel
+# make install python3.6.2
+
+# 开启外部服务端口
+su root
+firewall-cmd --zone=public --add-port=8101/tcp --permanent
+firewall-cmd --zone=public --add-port=9042/tcp --permanent
+firewall-cmd --zone=public --add-port=3306/tcp --permanent
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+firewall-cmd --zone=public --add-port=8080/tcp --permanent
+firewall-cmd --reload
+iptables -L -n
