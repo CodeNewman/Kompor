@@ -20,6 +20,7 @@ from configure.cn_setting import DAY, LINE, OFF_SHARE,\
 from url_lib import url_cn
 from configure.area_config import AREA_DICTS_KEY, AREA_KEY
 from tools.common import filt_codes
+from tools.format_print import jprint as print
 
 crawler = crawl()
 tool = mysql_dao()
@@ -80,6 +81,7 @@ def worker_hs(symbols, name):
 
 def main():
     codes_hs = flush(AREA_KEY).get_db_symbols()
+    print("symbols length is", len(codes_hs))
 
     hs_work_names = [
         '000',

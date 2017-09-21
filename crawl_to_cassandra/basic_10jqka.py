@@ -7,12 +7,12 @@ import os
 import sys
 
 import datetime
-from configure.common_config import CRAWL_PAGE_TYPE
 
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if base_dir not in sys.path:
     sys.path.append(base_dir)
 
+from configure.common_config import CRAWL_PAGE_TYPE
 from configure.area_config import AREA_DICTS_KEY, AREA_KEY
 from configure.cn_setting import LINE, OFF_SHARE, DAY, CN_CASSANDRA_KEYSPACE,\
     CN_CASSANDRA_HOSTS, CN_CASSANDRA_PASSWD, CN_CASSANDRA_PORT,\
@@ -21,6 +21,7 @@ from configure.cn_setting import LINE, OFF_SHARE, DAY, CN_CASSANDRA_KEYSPACE,\
 from crawl_lib.crawl import crawl
 from url_lib import url_cn
 from dao.casd_dao import CassandraDao
+from tools.format_print import jprint as print
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -56,18 +57,18 @@ class flush(object):
             page_number = 1
             while(True):
                 url = url_cn.get_code_url(page_number)
-                page_stock, is_tail = self.crawl_hs(url, CRAWL_PAGE_TYPE.html)
+                page_stock, is_tail = self.crawl_hs(url, CRAWL_PAGE_TYPE.html)  # @UndefinedVariable
                 stocks.append(page_stock)
                 if is_tail:
                     break
                 else:
                     page_number += 1
-            print('crawl symbols completed !', end='\n')
+            print('crawl symbols completed !')
             return stocks
 
 
     def crawl_hs(self, url, crawl_page_type):
-        if crawl_page_type is CRAWL_PAGE_TYPE.html:
+        if crawl_page_type is CRAWL_PAGE_TYPE.html:  # @UndefinedVariable
             soup = crawler.craw_to_bs4(url)
             tbody = soup.table.tbody
             trs = tbody.findAll("tr")
@@ -78,7 +79,7 @@ class flush(object):
                     _row.append(td.get_text())
                 _page.append(_row)
 
-            count = soup.div.span.get_text()
+            count = soup.div.span.get_text() or None
             cmp_count = str(count).split("/")
             is_tail = cmp_count[0] == cmp_count[1]
             print('The progress of stock crawl', count)
@@ -139,7 +140,7 @@ class flush(object):
 
     def get_db_symbols(self):
         symbols = []
-        sql = "SELECT SYMBOL FROM " + CN_TABLES_STOCK_RATIO_FROM_10JQKA
+        sql = "SELECT DISTINCT SYMBOL FROM " + CN_TABLES_STOCK_RATIO_FROM_10JQKA
         result_set = self.cassandra_dao.execute_sql(sql, keyspace=self.keyspace)
         for result in result_set:
             symbols.append(result.symbol)
@@ -167,7 +168,6 @@ class flush(object):
         for symbol in symbols:
             url = url_cn.get_share_url(LINE, area, symbol, OFF_SHARE, DAY, 'last')
             data = crawler.craw_to_json(url)
-            print("crawling :", symbol, end=" : ")
             try:                    
                 del data["data"]
                 elements.append([
@@ -178,16 +178,16 @@ class flush(object):
                     str(symbol),
                     str(data["name"]).replace(" ", ""),
                     ])
-                print(data["name"], end="\n")
+                print("crawling :", symbol, data["name"])
             except:
                 print("Exception", )
                 print(sys.exc_info())
                 pass
 
-        print("inserting to db.", end = "\n")
+        print("inserting to db.")
         if elements:
             self.cassandra_dao.batch_execute_prepared_one_sql(sql, elements, keyspace=self.keyspace ,slice_length=100)
-            print('insert to db completed !', end = "\n")
+            print('insert to db completed !')
     
 def main():
     print('start 10jqka worker !')

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>{{ code }}的详细信息</title>
+    </head>
+    <div style="overflow-x: auto; overflow-y: auto; height: screen.availHeight; width:screen.availWidth;">
+    <body>
+	    <p /><p /><p /><p /><p />
+
+        <div align="center">       
+        <table id="table" border="1" align="center" width="65%" cellpadding="2" cellspacing="1">
+            <caption>{{ code }} 的详细信息</caption>
+            <thead>
+                <tr>
+                	<th rowspan="3" >股票号码</th>
+                    <th rowspan="3">日期</th>
+                    <th rowspan="3">来源</th>
+                    <th colspan="10">对比信息</th>
+                </tr>
+                <tr>
+                	<th colspan="5">不复权</th>
+                	<th colspan="5">前复权</th>
+                </tr>
+                <tr>
+					<th>日开盘价</th>
+					<th>日最高价</th>
+					<th>日最低价</th>
+					<th>日收盘价</th>
+					<th>日成交量</th>
+					<th>日开盘价</th>
+					<th>日最高价</th>
+					<th>日最低价</th>
+					<th>日收盘价</th>
+					<th>日成交量</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for res in result %}
+                <tr  align="center">
+					<td rowspan="3">{{ res.0 }}</td>
+					<td rowspan="3">{{ res.1 }}</td>
+					<td>中股</td>
+					<td>{{ res.2 }}</td>
+					<td>{{ res.3 }}</td>
+					<td>{{ res.4 }}</td>
+					<td>{{ res.5 }}</td>
+					<td>{{ res.6 }}</td>
+					<td>{{ res.7 }}</td>
+					<td>{{ res.8 }}</td>
+					<td>{{ res.9 }}</td>
+					<td>{{ res.10 }}</td>
+					<td>{{ res.11 }}</td>
+                </tr>
+                <tr  align="center">
+                	<td>同花顺</td>
+					<td>{{ res.12 }}</td>
+					<td>{{ res.13 }}</td>
+					<td>{{ res.14 }}</td>
+					<td>{{ res.15 }}</td>
+					<td>{{ res.16 }}</td>
+					<td>{{ res.17 }}</td>
+					<td>{{ res.18 }}</td>
+					<td>{{ res.19 }}</td>
+					<td>{{ res.20 }}</td>
+					<td>{{ res.21 }}</td>
+                </tr>
+                <tr  align="center">                	
+					<td>差值</td>
+					<td {% if res.22 != "0.0" %} bgcolor="FFF68F" {% endif %}>{{ res.22 }}</td>
+					<td {% if res.23 != "0.0" %} bgcolor="FFF68F" {% endif %}>{{ res.23 }}</td>
+					<td {% if res.24 != "0.0" %} bgcolor="FFF68F" {% endif %}>{{ res.24 }}</td>
+					<td {% if res.25 != "0.0" %} bgcolor="FFF68F" {% endif %}>{{ res.25 }}</td>
+					<td {% if res.26 != "0.0" %} bgcolor="FFF68F" {% endif %}>{{ res.26 }}</td>
+					<td {% if res.27 != "0.0" %} bgcolor="FFF68F" {% endif %}>{{ res.27 }}</td>
+					<td {% if res.28 != "0.0" %} bgcolor="FFF68F" {% endif %}>{{ res.28 }}</td>
+					<td {% if res.29 != "0.0" %} bgcolor="FFF68F" {% endif %}>{{ res.29 }}</td>
+					<td {% if res.30 != "0.0" %} bgcolor="FFF68F" {% endif %}>{{ res.30 }}</td>
+					<td {% if res.31 != "0.0" %} bgcolor="FFF68F" {% endif %}>{{ res.31 }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </body>
+    </div>
+</html>

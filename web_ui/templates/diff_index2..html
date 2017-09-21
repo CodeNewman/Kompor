@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Stock Bar 对比统计信息主页</title>
+    </head>
+    <div style="overflow-x: auto; overflow-y: auto; height: screen.availHeight; width:screen.availWidth;">
+    <body>
+	    <p /><p /><p /><p /><p />
+
+        <div align="center">       
+        <table id="table" border="1" align="center" width="65%" cellpadding="2" cellspacing="1">
+            <caption>Stock Bar 对比统计信息主页</caption>
+            <thead>
+                <tr>
+                    <th rowspan="3">年份</th>
+                    <th rowspan="3">股票代码</th>
+                    <th colspan="10">不相同数量(单位 : 个)</th>
+                </tr>
+                <tr>
+                	<th colspan="5">不复权</th>
+                	<th colspan="5">前复权</th>
+                </tr>
+                <tr>                	
+					<th>日开盘价</th>
+					<th>日最高价</th>
+					<th>日最低价</th>
+					<th>日收盘价</th>
+					<th>日成交量</th>
+					<th>日开盘价</th>
+					<th>日最高价</th>
+					<th>日最低价</th>
+					<th>日收盘价</th>
+					<th>日成交量</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for res in result %}
+                <tr  align="center">
+					<td> <a href="/stock/{{ res.1 }}" > {{ res.1 }}</a></td>
+					<td>{{ res.2 }}</td>
+					<td>{{ res.3 }}</td>
+					<td>{{ res.4 }}</td>
+					<td>{{ res.5 }}</td>
+					<td>{{ res.6 }}</td>
+					<td>{{ res.7 }}</td>
+					<td>{{ res.8 }}</td>
+					<td>{{ res.9 }}</td>
+					<td>{{ res.10 }}</td>
+					<td>{{ res.11 }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </body>
+    </div>
+</html>

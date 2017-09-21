@@ -21,7 +21,7 @@ class crawl(object):
         result = ''
         r= Response() 
         try:
-            r = requests.get(url)
+            r = requests.get(url, verify=False)
         except:
             pass
 

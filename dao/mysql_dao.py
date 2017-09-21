@@ -6,7 +6,8 @@ Created on Aug 31, 2017
 import pymysql.cursors
 from configure.cn_setting import CN_MYSQL_HOST, CN_MYSQL_USER, CN_MYSQL_PASSWD,\
     CN_MYSQL_DB
-import sys
+
+from tools.format_print import jprint as print
 
 class mysql_dao(object):
     '''
@@ -19,8 +20,20 @@ class mysql_dao(object):
                                  db=CN_MYSQL_DB,
                                  charset='utf8mb4',
                                  cursorclass=pymysql.cursors.DictCursor)
-        
+    
+    cursor = connection.cursor()
+    
     def execute(self, sql, element):
+        ''''  封装执行方法  '''
+        try:            
+            self.cursor.execute(sql, element)
+        finally:
+            pass
+    
+    def commit (self):
+        self.connection.commit()
+    
+    def execute_old(self, sql, element):
         ''''  封装执行方法  '''
         try:            
             with self.connection.cursor() as cursor:
@@ -47,7 +60,7 @@ class mysql_dao(object):
         finally:
             pass
 
-    def fetchall(self,  sql, element):
+    def fetchall(self, sql, element):
         '''  封装 获取所有数据，带参数  '''
         try:
             with self.connection.cursor() as cursor:
@@ -57,14 +70,14 @@ class mysql_dao(object):
         finally:
             pass
 
-    def fetchall_one_column(self,  sql, element, column):
+    def fetchall_one_column(self, sql, element, column):
         '''  获取一行数据  '''
         try:
             result = []
             with self.connection.cursor() as cursor:
                 cursor.execute(sql, element)
-                all = cursor.fetchall()  # @ReservedAssignment
-                for item in all:
+                vals = cursor.fetchall()
+                for item in vals:
                     result.append(item[column])
                 return result
         finally:
@@ -72,6 +85,7 @@ class mysql_dao(object):
 
     def close(self):
         '''  关闭数据库连接通道  '''
+        self.cursor.close()
         self.connection.close()
 
     def insert_value_to_db(self, sql, element, code):
@@ -81,49 +95,28 @@ class mysql_dao(object):
         msg = 'ok'
         try:
             self.update(sql, element)
-            print('code \t', code, '\t :Updated')
+            print('code', code,'updated ->', element)
               
         except pymysql.err.IntegrityError:
-#             print('code \t', code, '\t', code, '\t :already has')
             msg = 'IntegrityError'
             pass
-        except pymysql.err.ProgrammingError as err:
-            print('code \t', code, '\t', code, '\t :ProgrammingError')
-            print(repr(err))
-            print(element)
-            pass
-        except pymysql.err.InternalError as err:
-            print('code \t', code, '\t\t :InternalError')
-            print(repr(err))
-            print(element)
-            pass
-        except KeyError:
-            print('code \t', code, '\t\t :KeyError')
-            print(element)
-            pass
-        except TimeoutError as err:
-            print('code \t', code, '\t\t :TimeoutError')
-            print(repr(err))
-            print(element)
-            pass
-        except pymysql.err.DataError as err:
-            print('code \t', code, '\t\t :pymysql.err.DataError')
-            print(repr(err))
-            print(element)
-            pass
-        except ValueError as err:
-            print('code \t', code, '\t\t :ValueError')
-            print(repr(err))
-            print(element)
-            pass
-        except TypeError as err:
-            print('code \t', code, '\t\t :TypeError')
-            print(repr(err))
-            print(element)
-            pass
-        except:
-            print('\t\t', code, '\t\t :OtherError')
-            print(sys.exc_info()[0])
+        except Exception as e:
+            print('diff update', element[0], element[1], "Error !", end=' ')
+            print(e, end=' ')
             print(element)
             pass
         return msg
+    
+    def safe_updata_value(self, insert_url, update_url, element, condition, task_name=None):
+        try:
+            self.insert(insert_url, element)
+            print(task_name,'insert', element[0], element[1], "OK !")
+        except pymysql.err.IntegrityError:
+            for item in condition:
+                element.append(item)
+            self.update(update_url, element)
+            print(task_name,'update', element[0], element[1], "OK !")
+        except Exception as e:
+            print(task_name,'safe update value', element[0], element[1], "Error !", e, 'element:', element)
+            pass
+

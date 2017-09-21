@@ -7,7 +7,7 @@ if base_dir not in sys.path:
     sys.path.insert(0, base_dir)
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Kompor.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "kompor.settings")
     try:
         from django.core.management import execute_from_command_line
     except ImportError:

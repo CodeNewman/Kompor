@@ -1,4 +1,4 @@
-"""Kompor URL Configuration
+"""kompor URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from web_ui.views.index import index as index
+from web_ui.views.diff_index import index as diff_index
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^admin/' , admin.site.urls),
+    url(r'^diff/', diff_index),
+#     url(r'^', index),
 ]

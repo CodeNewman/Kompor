@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Stock Bar 方差信息</title>
+    </head>
+    <div style="overflow-x: auto; overflow-y: auto; height: screen.availHeight; width:screen.availWidth;">
+    <body>
+	    <p /><p /><p /><p /><p />
+
+        <div align="center">       
+        <table id="table" border="1" align="center" width="95%" cellpadding="2" cellspacing="1">
+            <caption>Stock Bar 方差信息</caption>
+            <thead>
+                <tr>
+                	<th rowspan="3">序号</th>
+                    <th rowspan="3">年份</th>
+                    <th rowspan="3">股票代码</th>
+                    <th colspan="20">方差（方差值/[偏移率最大的价格/偏移率])</th>
+                </tr>
+                <tr>
+                	<th colspan="10">不复权</th>
+                	<th colspan="10">前复权</th>
+                </tr>
+                <tr>                	
+					<th colspan="2">日开盘价</th>
+					<th colspan="2">日最高价</th>
+					<th colspan="2">日最低价</th>
+					<th colspan="2">日收盘价</th>
+					<th colspan="2">日成交量</th>
+					<th colspan="2">日开盘价</th>
+					<th colspan="2">日最高价</th>
+					<th colspan="2">日最低价</th>
+					<th colspan="2">日收盘价</th>
+					<th colspan="2">日成交量</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for res in result %}
+                <tr  align="center">
+					<td>{{ res.0.0 }}</td>
+					<td>{{2017}}</td>
+					<td> <a href="/stock/{{ res.0.1 }}" > {{ res.0.1 }}</a></td>
+					<td>{{ res.0.2 }}</td>
+					<td>{{ res.0.3 }}</td>
+					<td>{{ res.1.2 }}</td>
+					<td>{{ res.1.3 }}</td>
+					<td>{{ res.2.2 }}</td>
+					<td>{{ res.2.3 }}</td>
+					<td>{{ res.3.2 }}</td>
+					<td>{{ res.3.3 }}</td>
+					<td>{{ res.4.2 }}</td>
+					<td>{{ res.4.3 }}</td>
+					<td>{{ res.5.2 }}</td>
+					<td>{{ res.5.3 }}</td>
+					<td>{{ res.6.2 }}</td>
+					<td>{{ res.6.3 }}</td>
+					<td>{{ res.7.2 }}</td>
+					<td>{{ res.7.3 }}</td>
+					<td>{{ res.8.2 }}</td>
+					<td>{{ res.8.3 }}</td>
+					<td>{{ res.9.2 }}</td>
+					<td>{{ res.9.3 }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </body>
+    </div>
+</html>

@@ -3,14 +3,21 @@ Created on Aug 31, 2017
 
 @author: Coder_J
 '''
+import os, sys
+import multiprocessing
+
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if base_dir not in sys.path:
+    sys.path.append(base_dir)
+
 from dao.mysql_dao import mysql_dao as mysql_db
 from crawl_lib.crawl import crawl
-import multiprocessing
 from configure.area_config import AREA_KEY
 from configure.cn_setting import DAY, LINE, OFF_SHARE, ADJ_SHARE
 from url_lib import url_cn
 from crawl_to_cassandra.basic_10jqka import flush
 from tools.common import filt_codes
+from tools.format_print import jprint as print
 
 
 db = mysql_db()
@@ -24,18 +31,25 @@ def craw_quote_hs_2017(codes):
     '''
     type = LINE  # @ReservedAssignment
     area = AREA_KEY
-    flag = OFF_SHARE + DAY
+    flag = DAY + OFF_SHARE
     year = '2017'
     db_name = '10jqka_hs_00_bar'
     
     for code in codes:    
-        print('--------------------doing--------------------\t', code,)
+        print('--------------------doing--------------------', code,)
         craw_10jqka(type, area, code, flag, year, db_name)
-    
-    flag = ADJ_SHARE + DAY
+
+
+def craw_quote_hs_2017_adj(codes):
+    type = LINE  # @ReservedAssignment
+    area = AREA_KEY
+    year = '2017'
+    flag =  DAY + ADJ_SHARE
     db_name = '10jqka_hs_01_bar'
+    
     for code in codes:
         craw_10jqka(type, area, code, flag, year, db_name)
+
 
 def craw_quote_usa_2017(codes):
     '''
@@ -50,7 +64,7 @@ def craw_quote_usa_2017(codes):
     db_name = '10jqka_usa_01_bar'
     
     for code in codes:    
-        print('--------------------doing--------------------\t', code,)
+        print('--------------------doing-------------------->', code,)
         craw_10jqka(type, area, code, flag, year, db_name)
 
 def craw_10jqka(type, area, code, flag, year, db_name):  # @ReservedAssignment
@@ -94,8 +108,8 @@ def craw_10jqka(type, area, code, flag, year, db_name):  # @ReservedAssignment
             ]
         
 #         db.insert_value_to_db(sql, element, code)
-        flag = db.insert_value_to_db(inserl_sql, element, code)
-        if flag == "IntegrityError":
+        tag = db.insert_value_to_db(inserl_sql, element, code)
+        if tag == "IntegrityError":
             element.append(code)
             element.append(date)
             db.update_value_to_db(update_sql, element, code)
@@ -111,10 +125,14 @@ def worker_hs(codes, name):
     craw_quote_hs_2017(codes)
     print('\t\t\t\t\t', name, ' is completed !-------------------------------------------------!')
 
+def worker_hs_adj(codes, name):
+    craw_quote_hs_2017_adj(codes)
+    print('\t\t\t\t\t', name, ' is completed !-------------------------------------------------!')
+
 def main():
 #     codes_usa = tool.get_codes("usa")
     codes_hs = flush(AREA_KEY).get_db_symbols()
-    print(codes_hs)
+    print('daily 10jqka : codes is', len(codes_hs)
     
 #     for x in [chr(i) for i in range(65,91)]:
 #         p = multiprocessing.Process(target = worker_usa, args = (tool.filt_codes(codes_usa, x), x, ))
@@ -128,8 +146,15 @@ def main():
         '601',
         '603'
         ]
+    prs = []
+    
     for x in hs_work_names:
         p = multiprocessing.Process(target = worker_hs, args = (filt_codes(codes_hs, x), x, ))
+        prs.append(p)
+        p = multiprocessing.Process(target = worker_hs_adj, args = (filt_codes(codes_hs, x), x, ))
+        prs.append(p)
+        
+    for p in prs:
         p.start()
 
 if __name__ == '__main__':
